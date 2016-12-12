@@ -31,7 +31,7 @@ var SDK = {
 
   Book: {
     getAll: function (cb) {
-      SDK.request({method: "GET", url: "/books", headers: {filter: {include: ["authors", "publisher"]}}}, cb);
+      SDK.request({method: "GET", url: "/getbooks"}, cb);
     },
     create: function (data, cb) {
       SDK.request({method: "POST", url: "/books", data: data, headers: {authorization: SDK.Storage.load("tokenId")}}, cb);
@@ -71,16 +71,16 @@ var SDK = {
         username: username,
         password: password
       },
-      url: "/staffs/login?include=user",
+      url: "/login",
       method: "POST"
     }, function (err, data) {
 
       //On login-error
       if (err) return cb(err);
 
-      SDK.Storage.persist("tokenId", data.id);
-      SDK.Storage.persist("userId", data.userId);
-      SDK.Storage.persist("user", data.user);
+      SDK.Storage.persist("username", data.userId);
+      SDK.Storage.persist("userId", data.password);
+      SDK.Storage.persist("password", data.username);
 
       cb(null, data);
 
