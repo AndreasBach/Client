@@ -21,18 +21,18 @@ $(document).ready(function () {
   });
 
   //Fires on page-load
-  SDK.User.getAll(function (err, users) {
+  SDK.User.getAll(function (err, data) {
     if (err) throw err;
 
     var $usersTableBody = $("#usersTableBody");
-    users.forEach(function (user) {
+    data.forEach(function (users) {
 
       $usersTableBody.append(
         "<tr>" +
-        "<td>" + user.firstName + " " + user.lastName + "</td>" +
-        "<td>" + user.username + "</td>" +
-        "<td>" + user.email + "</td>" +
-        "<td>" + user.id + "</td>" +
+        "<td>" + users.userId + "</td>" +
+        "<td>" + users.username + "</td>" +
+        "<td>" + users.email + "</td>" +
+        "<td>" + users.phonenumber + "</td>" +
         "</tr>");
     });
 
