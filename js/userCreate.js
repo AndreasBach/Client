@@ -3,31 +3,30 @@ $(document).ready(function () {
  $("#createUserButton").on("click", function(){
 
 
-
      var user = {
 
          username: $("#inputUsername").val(),
 
          password: $("#inputPassword").val(),
 
-         phonenumber: + $("#inputPhonenumber").val(),
+         phonenumber: +$("#inputPhonenumber").val(),
 
          address: $("#inputAddress").val(),
 
          email: $("#inputEmail").val(),
 
-         mobilepay: + $("#inputMobilepay").prop("checked"),
+         mobilepay: +$("#inputMobilePay").prop("checked"),
 
          cash: +$("#inputCash").prop("checked"),
 
-         transfer: + $ ("#inputTransfer").prop("checked")
+         transfer: +$ ("#inputTransfer").prop("checked")
 
 };
 
      // Creater User
 
      SDK.User.create(user, function (err) {
-         if (err) throw err;
+         if (err) throw JSON.stringify(err);
 
          window.alert("Bruger oprettet");
 
