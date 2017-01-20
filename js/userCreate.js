@@ -2,28 +2,37 @@ $(document).ready(function () {
 
  $("#createUserButton").on("click", function(){
 
+/*
+Min create user
+ */
+     var $username = $("#inputUsername").val()
 
-     var user = {
+     var $password = $("#inputPassword").val()
 
-         username: $("#inputUsername").val(),
+     var $email = $("#inputEmail").val()
 
-         password: $("#inputPassword").val(),
+     var $phonenumber = parseInt($("#inputPhonenumber").val())
 
-         phonenumber: +$("#inputPhonenumber").val(),
+     var $address = $("#inputAddress").val()
 
-         address: $("#inputAddress").val(),
 
-         email: $("#inputEmail").val(),
+     var mobilepayIsChosen = 0;
+     if ($("input[name=mobilepay]:checked").val()) {
+         mobilepayIsChosen = 1;
 
-         mobilepay: +$("#inputMobilePay").prop("checked"),
+     }
 
-         cash: +$("#inputCash").prop("checked"),
+     var cashIsChosen = 0;
+     if ($("input[name=cash]:checked").val()) {
+         cashIsChosen = 1;
+     }
 
-         transfer: +$ ("#inputTransfer").prop("checked")
+     var transferIsChosen = 0;
+     if ($("input[name=transfer]:checked").val()) {
+         transferIsChosen = 1;
+     }
 
-};
-
-     // Creater User
+     // Create user
 
      SDK.User.create(user, function (err) {
          if (err) throw JSON.stringify(err);

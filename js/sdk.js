@@ -41,8 +41,13 @@ var SDK = {
 
     create: function(data, cb){
         SDK.request({method: "POST", url: "/createuser", data: data}, cb);
+    },
+    update: function(data, cb){
+      SDK.request({method: "POST", url: "/updateeuser", data: data}, cb);
     }
+
   },
+
 
   logOut:function() {
     SDK.Storage.remove("tokenId");
