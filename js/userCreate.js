@@ -32,6 +32,21 @@ Min create user
          transferIsChosen = 1;
      }
 
+
+     //JSON object
+     var user = {
+
+         username: $username,
+         password: $password,
+         phonenumber: $phonenumber,
+         address: $address,
+         email: $email,
+         mobilepay: mobilepayIsChosen,
+         cash: cashIsChosen,
+         transfer: transferIsChosen
+     };
+
+
      // Create user
 
      SDK.User.create(user, function (err) {
