@@ -77,3 +77,47 @@ $(document).ready(function () {
             });
         });
     });
+
+    /*
+     Nu kan brugeren oprette en ny annonce
+      */
+    $("#AdNewButton").on("click", function () {
+
+
+        $("#newAdModal").css("display", "block");
+
+        var $isbn = parseInt($("#inputAdisbn").val())
+
+        var $price = parseInt($("#inputAdprice").val())
+
+        var $rating = parseInt($("#inputAdrating").val())
+
+        var $comment = ($("#inputAdcomment").val())
+
+        /*
+        JSON object til ovenstående kode
+         */
+
+        var Ad = {
+
+            isbn: $isbn,
+            price: $price,
+            rating: $rating,
+            comment: $comment,
+
+        };
+
+        /*
+        Afslutter med at oprette AD
+         */
+        SDK.allAds.create(Ad, function (err) {
+            if (err) throw err;
+
+            window.alert("Din annonce er nu oprettet");
+
+            window.location.href = "user.html";
+        });
+    });
+
+});
+
