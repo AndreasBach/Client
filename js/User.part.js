@@ -4,7 +4,9 @@
 
 $(document).ready(function () {
 
-    // Bøger der kan hentes ned
+    /*
+     Bøger der kan hentes ned
+      */
     SDK.Book.getAll(function (err, data) {
         if (err) throw err;
 
@@ -21,7 +23,9 @@ $(document).ready(function () {
                 "</tr>");
         });
 
-        // Mulighed for at slette bøger
+        /*
+         Mulighed for at slette bøger
+          */
         $(".deleteBookButton").on("click", function () {
 
             var $button = $(this);
@@ -34,4 +38,42 @@ $(document).ready(function () {
 
         });
 
+    });
+
+    /*
+     Annoncer der kan hentes ned
+      */
+    SDK.allAds.getAll(function (err, data) {
+        if (err) throw err;
+
+        var $addsTableBody = $("#addsTableBody");
+        data.forEach(function (ad, i) {
+
+            $addsTableBody.append(
+                "<tr>" +
+                "<td>" + ad.isbn + "</td>" +
+                "<td>" + ad.price + "</td>" +
+                "<td>" + ad.rating + "</td>" +
+                "<td><button class='reserveAdButton' data-adId=" + ad.adId + ">Reserver</Button></td>" +
+                "</tr>");
+        });
+
+        /*
+         Dette giver muligheden for at reseverer annoncer
+          */
+
+        $(".reserveAdButton").on("click", function () {
+
+            var $reserveAd = $(this);
+
+            var adId = {
+                id: $reserveAd.data("adid")
+            };
+
+
+            SDK.allAds.reserve(adId, function (err) {
+                if (err) throw JSON.stringify(err);
+                location.reload();
+            });
+        });
     });
