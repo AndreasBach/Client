@@ -1,10 +1,14 @@
 $(document).ready(function () {
 
+
+    /*
+     Min create user
+     */
+
  $("#createUserButton").on("click", function(){
 
-/*
-Min create user
- */
+
+
      var $username = $("#inputUsername").val()
 
      var $password = $("#inputPassword").val()
