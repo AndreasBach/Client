@@ -7,6 +7,7 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
+    background-image: url("http://www.ukrunchat.co.uk/wp-content/uploads/2016/12/why-you-should-read-and-re-read-these-high-school-books-as-an-adult.jpeg");
 }
 .footer {
     position: absolute;
