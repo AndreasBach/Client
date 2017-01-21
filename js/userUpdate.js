@@ -19,7 +19,6 @@ $(document).ready(function () {
             email: $("#inputEmail").val(),
 
 
-
             var mobilepayIsChosen = 0;
         if ($("input[name=mobilepay]:checked").val()) {
             mobilepayIsChosen = 1;
