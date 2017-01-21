@@ -179,3 +179,42 @@ SDK.allAds.myads(function (err, data) {
     });
 });
 
+
+/*
+ Her kan der hentes reservationer
+  */
+SDK.allAds.myreservations(function (err, data) {
+    if (err) throw err;
+
+    var $myReservationsTableBody = $("#myReservationsTableBody");
+    data.forEach(function (ad, i) {
+
+        $myReservationsTableBody.append(
+            "<tr>" +
+            "<td>" + ad.adId + "</td>" +
+            "<td>" + ad.timestamp + "</td>" +
+            "<td>" + ad.bookIsbn + "</td>" +
+            "<td>" + ad.userUsername + "</td>" +
+            "<td>" + ad.userPhonenumber + "</td>" +
+            "<td><button class='deleteReservationAdButton' data-adId=" + ad.adId + ">Slet reservation</Button></td>" +
+            "</tr>");
+    });
+
+    /*
+    Her kan der slettes reservationer
+     */
+    $(".deleteReservationAdButton").on("click", function () {
+
+        var $deleteReservation = $(this);
+
+        var adId = {
+            id: $deleteReservation.data("adid")
+        };
+
+
+        SDK.allAds.deletereservation(adId, function (err, data) {
+            if (err) throw JSON.stringify(err);
+            location.reload();
+        });
+    });
+});
