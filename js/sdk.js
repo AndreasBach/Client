@@ -22,38 +22,6 @@ var SDK = {
     });
   },
 
-  Book: {
-    getAll: function (cb) {
-      SDK.request({method: "GET", url: "/getbooks"}, cb);
-    },
-    create: function (data, cb) {
-      SDK.request({method: "POST", url: "/books", data: data}, cb);
-    }
-  },
-
-  User: {
-    getAll: function (cb) {
-      SDK.request({method: "GET", url: "/getusers"}, cb);
-    },
-    current:function () {
-      return SDK.Storage.load("user");
-    },
-
-    create: function(data, cb){
-        SDK.request({method: "POST", url: "/createuser", data: data}, cb);
-    },
-    update: function(data, cb){
-      SDK.request({method: "POST", url: "/updateeuser", data: data}, cb);
-    }
-
-  },
-
-
-  logOut:function() {
-    SDK.Storage.remove("tokenId");
-    SDK.Storage.remove("userId");
-    SDK.Storage.remove("user");
-  },
 
   login: function (username, password, cb) {
     this.request({
@@ -77,11 +45,67 @@ var SDK = {
     });
   },
 
+/*
+SDK Books
+ */
+  Book: {
+    getAll: function (cb) {
+      SDK.request({method: "GET", url: "/getbooks"}, cb);
+    },
+    create: function (data, cb) {
+      SDK.request({method: "POST", url: "/books", data: data}, cb);
+    }
+  },
+
+/*
+SDK Users
+ */
+  User: {
+    getAll: function (cb) {
+      SDK.request({method: "GET", url: "/getusers"}, cb);
+    },
+
+    /*
+     current:function () {
+     return SDK.Storage.load("user");
+     },
+     */
+
+
+    create: function(data, cb){
+        SDK.request({method: "POST", url: "/createuser", data: data}, cb);
+    },
+    update: function(data, cb){
+      SDK.request({method: "POST", url: "/updateeuser", data: data}, cb);
+    }
+
+  },
+
+  /*
+  SDK annoncer
+   */
+
+  allAds: {
+    getAll: function (cb) {
+      SDK.request({method: "GET", url: "/getads"}, cb);
+    },
+    create: function (data, cb) {
+      SDK.request({method: "POST", url: "/createad", data: data}, cb);
+    },
+
+  logOut:function() {
+    SDK.Storage.remove("tokenId");
+    SDK.Storage.remove("userId");
+    SDK.Storage.remove("user");
+  },
+
   Storage: {
     prefix: "BookStoreSDK",
+
     persist: function (key, value) {
       window.localStorage.setItem(this.prefix + key, (typeof value === 'object') ? JSON.stringify(value) : value)
     },
+
     load: function (key) {
       var val = window.localStorage.getItem(this.prefix + key);
       try {
@@ -91,6 +115,7 @@ var SDK = {
         return val;
       }
     },
+
     remove:function (key) {
       window.localStorage.removeItem(this.prefix + key);
     }

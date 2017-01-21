@@ -50,12 +50,11 @@ Min create user
      // Create user
 
      SDK.User.create(user, function (err) {
-         if (err) throw JSON.stringify(err);
+         if (err) throw err;
 
          window.alert("Bruger oprettet");
 
          window.location.href = "index.html";
-
 
      });
  });
