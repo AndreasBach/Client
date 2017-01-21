@@ -121,3 +121,61 @@ $(document).ready(function () {
 
 });
 
+/*
+ Dette vil give brugeren mulighed for at hente egne annoncer
+  */
+SDK.allAds.myads(function (err, data) {
+    if (err) throw err;
+
+    var $myadsTableBody = $("#myadsTableBody");
+    data.forEach(function (ad, i) {
+
+        $myadsTableBody.append(
+            "<tr>" +
+            "<td>" + ad.isbn + "</td>" +
+            "<td>" + ad.price + "</td>" +
+            "<td>" + ad.rating + "</td>" +
+            "<td>" + ad.comment + "</td>" +
+            "<td><button class='deleteAdButton' data-adId=" + ad.adId + ">Fjern Annonce</Button></td>" +
+            "<td><button class='unlockAdButton' data-adId=" + ad.adId + ">Frigiv</Button></td>" +
+            "</tr>");
+    });
+
+    /*
+     Mulighed for at fjerne ens annonce
+      */
+    $(".deleteAdButton").on("click", function () {
+
+        var $deleteAd = $(this);
+
+        var adId = {
+            id: $deleteAd.data("adid")
+        };
+
+
+        SDK.allAds.delete(adId, function (err) {
+            if (err) throw JSON.stringify(err);
+            location.reload();
+        });
+    });
+
+
+/*
+ Mulighed for at frigive ens annonce
+  */
+    $(".unlockAdButton").on("click", function () {
+
+        var $unlockAd = $(this);
+
+        var adId = {
+            id: $unlockAd.data("adid")
+        };
+
+
+        SDK.allAds.unlockreservation(adId, function (err) {
+            if (err) throw JSON.stringify(err);
+            location.reload();
+        });
+    });
+});
+
