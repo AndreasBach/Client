@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
-  //Fires on page-load
+  /*
+  Fremvisning af bøger
+   */
   SDK.Book.getAll(function(err, data){
     if(err) throw err;
 
