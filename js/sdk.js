@@ -33,7 +33,7 @@ var SDK = {
       method: "POST"
     }, function (err, data) {
 
-      //On login-error
+      //Ved fejl ift. login
       if (err) return cb(err);
 
       SDK.Storage.persist("username", data.userId);
